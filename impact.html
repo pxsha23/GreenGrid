@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Simulation • Policy Sandbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: var(--background); }
+        .content { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .metrics { display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; }
+        .video-placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: 16px; padding: 3rem; text-align:center; box-shadow: var(--shadow-soft); }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">GreenGrid</a>
+            <div class="navbar-links">
+                <a href="index.html#features">Features</a>
+                <a href="ward-map.html">Ranking</a>
+                <a href="knowmore.html">Know More</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero container" style="padding-bottom:2rem;">
+        <div class="hero-text">
+            <h1>Impact Simulation Mode</h1>
+            <p>Predict how wards will improve when development actions, cooling strategies, or zoning reforms are introduced.</p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <a href="ward-map.html" class="btn btn-primary">Open Live Map</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://media.istockphoto.com/id/186974301/photo/city-pattern-volume.webp?a=1&s=612x612&w=0&k=20&c=bToX44OpseOZM-_17EiaRQaiX_JxuZT38zQ-ZKyn800=" alt="Urban planning render" loading="lazy">
+        </div>
+    </section>
+
+    <div class="content">
+        <div class="card-surface" style="margin-bottom:2rem;">
+            <h2>Why Simulate First?</h2>
+            <p>Impact Simulation Mode allows leaders to prototype cool roof programs, transit corridors, or greening drives digitally before breaking ground.</p>
+        </div>
+
+        <div class="metrics">
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg></div>
+                <h3>Scenario Builder</h3>
+                <p>Stack multiple interventions—tree cover, reflectivity, transit—and measure cumulative effects.</p>
+            </div>
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l5 5L20 7"/></svg></div>
+                <h3>Policy Validation</h3>
+                <p>Compare baseline and simulated KPIs to justify investments.</p>
+            </div>
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17l6-6 4 4 6-6"/></svg></div>
+                <h3>Equity Lens</h3>
+                <p>Identify communities that benefit the most and ensure inclusive planning.</p>
+            </div>
+        </div>
+
+        <div class="metrics" style="margin-top:2rem;">
+            <div class="card-surface">
+                <h3>Key Inputs</h3>
+                <ul style="padding-left:1rem; color:var(--text-muted); line-height:1.8;">
+                    <li>Surface temperature baseline</li>
+                    <li>Population at risk</li>
+                    <li>Investment envelope</li>
+                </ul>
+            </div>
+            <div class="card-surface">
+                <h3>Outputs</h3>
+                <ul style="padding-left:1rem; color:var(--text-muted); line-height:1.8;">
+                    <li>Heat risk delta</li>
+                    <li>Projected resilience score</li>
+                    <li>Ward prioritization list</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- <div class="video-placeholder" style="margin-top:2rem;">
+            <h3>Demo Coming Soon</h3>
+            <p>Video demonstration of the simulation workflow will be embedded here.</p>
+        </div>
+    </div> -->
+    <!-- IMPACT SIMULATION BUTTON + VIDEO (REPLACES DEMO PLACEHOLDER) -->
+<!-- IMPACT SIMULATION BUTTON + VIDEO -->
+<!-- IMPACT SIMULATION VIDEO (ALWAYS VISIBLE) -->
+<div style="margin-top:2rem; text-align:center;">
+
+    <h3 style="margin-bottom:1rem;">Impact Simulation</h3>
+
+    <video id="impact-player" controls autoplay muted loop
+           style="width:100%; max-width:900px; border-radius:16px; box-shadow:var(--shadow-soft);">
+        <source src="assets/videos/impactstimulation.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- fallback error -->
+    <div id="video-error" style="display:none; color:#f87171; margin-top:0.8rem;">
+        Unable to load the video.
+    </div>
+
+</div>
+
+  
+
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+    
+            <!-- Brand + Mission -->
+            <div class="footer-col">
+                <h3 class="footer-logo">GreenGrid</h3>
+                <p class="footer-desc">
+                    AI-driven analytics helping cities become greener, smarter,
+                    and more resilient for the future.
+                </p>
+            </div>
+    
+            <!-- Solutions -->
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Ward Sustainability Index</a></li>
+                    <li><a href="#">City Emission Insights</a></li>
+                    <li><a href="#">Urban Risk Heatmap</a></li>
+                    <li><a href="#">AI Decision Support</a></li>
+                </ul>
+            </div>
+    
+            <!-- Resources -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Guide</a></li>
+                    <li><a href="#">Research Datasets</a></li>
+                    <li><a href="#">Open Data Policy</a></li>
+                </ul>
+            </div>
+    
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:team@greengrid.io">team@greengrid.io</a></li>
+                    <li>PCCOE, Pune, India</li>
+                    <li>PCCOE Grand Challenge 2025</li>
+                </ul>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© 2025 GreenGrid Team | All rights reserved.</p>
+        </div>
+    </footer>
+</script>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script>
+        // const btn = document.getElementById("impact-btn");
+        const container = document.getElementById("impact-video");
+        const player = document.getElementById("impact-player");
+        const errBox = document.getElementById("video-error");
+      
+        btn.addEventListener("click", () => {
+          // show the video container and scroll to it
+          container.style.display = "block";
+          container.scrollIntoView({ behavior: "smooth" });
+      
+          // try to play (optional; browsers may block autoplay)
+          player.pause(); // reset
+          player.currentTime = 0;
+        });
+      
+        // Diagnostic: catch network / decode errors
+        player.addEventListener('error', (e) => {
+          console.error('Video error:', e, player.error);
+          errBox.style.display = 'block';
+          // show human friendly message
+          errBox.textContent = 'Unable to load or play the video. Check that the file exists at "assets/videos/impactstimulation.mp4" and the server is running.';
+        });
+      
+        // Diagnostic: log when source loads metadata (file found and readable)
+        player.addEventListener('loadedmetadata', () => {
+          console.log('Video metadata loaded. Duration:', player.duration);
+        });
+      
+        // Optional: report network errors (404)
+        player.addEventListener('stalled', () => {
+          console.warn('Video stalled; possible network issue.');
+        });
+      </script>
+      
+    
+</body>
+</html>

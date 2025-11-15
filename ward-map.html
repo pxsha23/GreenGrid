@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenGrid Ward Ranking Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { background: var(--background); }
+        .map-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-soft);
+        }
+        #ward-list {
+            max-height: 600px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        #ward-list .card-surface {
+            border: 1px solid var(--border);
+            box-shadow: none;
+            padding: 1rem 1.25rem;
+        }
+        @media (max-width: 992px) {
+            .map-grid { grid-template-columns: 1fr; }
+            #map { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">GreenGrid</a>
+            <div class="navbar-links">
+                <a href="index.html#features">Features</a>
+                <a href="ward-map.html">Ranking</a>
+                <a href="knowmore.html">Know More</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero container" style="padding-bottom:2rem;">
+        <div class="hero-text">
+            <h1>Live Ward Ranking Map</h1>
+            <p>
+                Explore vulnerability scores, population exposure, and geo-located wards in real time. Use the list to jump to key locations or layer policy simulations.
+            </p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <a href="#map" class="btn btn-primary">Jump to Map</a>
+                <a href="index.html#ranking" class="btn btn-secondary">Back to Overview</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1728244984473-b65f785e7936?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="City planning meeting" loading="lazy">
+        </div>
+    </section>
+
+    <div class="map-wrapper">
+        <div class="map-grid">
+            <div id="map"></div>
+            <div>
+                <h3 style="margin-bottom:1rem;">Ward Vulnerability List</h3>
+                <div id="ward-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+    
+            <!-- Brand + Mission -->
+            <div class="footer-col">
+                <h3 class="footer-logo">GreenGrid</h3>
+                <p class="footer-desc">
+                    AI-driven analytics helping cities become greener, smarter,
+                    and more resilient for the future.
+                </p>
+            </div>
+    
+            <!-- Solutions -->
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Ward Sustainability Index</a></li>
+                    <li><a href="#">City Emission Insights</a></li>
+                    <li><a href="#">Urban Risk Heatmap</a></li>
+                    <li><a href="#">AI Decision Support</a></li>
+                </ul>
+            </div>
+    
+            <!-- Resources -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Guide</a></li>
+                    <li><a href="#">Research Datasets</a></li>
+                    <li><a href="#">Open Data Policy</a></li>
+                </ul>
+            </div>
+    
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:team@greengrid.io">team@greengrid.io</a></li>
+                    <li>PCCOE, Pune, India</li>
+                    <li>PCCOE Grand Challenge 2025</li>
+                </ul>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© 2025 GreenGrid Team | All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="explore.app.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

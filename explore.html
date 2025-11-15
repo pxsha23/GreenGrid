@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Mode • Spatial Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: var(--background); }
+        .content { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .video-placeholder { background: var(--surface); border: 2px dashed var(--border); border-radius: 16px; padding: 3rem; text-align: center; box-shadow: var(--shadow-soft); }
+        .video-placeholder h3 { margin-bottom:0.5rem; }
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.5rem; margin-top:2rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">GreenGrid</a>
+            <div class="navbar-links">
+                <a href="index.html#features">Features</a>
+                <a href="ward-map.html">Ranking</a>
+                <a href="knowmore.html">Know More</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero container" style="padding-bottom:2rem;">
+        <div class="hero-text">
+            <h1>Explore Mode</h1>
+            <p>Granular city insights at the building and neighborhood level so planners can diagnose issues accurately.</p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <a href="ward-map.html" class="btn btn-primary">View Ward Map</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1717700299588-ee73dc7de1fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGNpdHklMjBtYXBzfGVufDB8fDB8fHww" alt="Urban skyline" loading="lazy">
+        </div>
+    </section>
+
+    <div class="content">
+        <div class="card-surface" style="margin-bottom:2rem;">
+            <h2>Purpose</h2>
+            <p>Explore Mode layers datasets such as land use, social vulnerability, energy demand, and vegetation to give planners the situational awareness they need to take informed actions.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h18v6H3zM3 15h18v6H3z"/></svg></div>
+                <h3>Building-Level Layers</h3>
+                <p>Map occupancy, land-use classification, and structural risk to understand exposure block by block.</p>
+            </div>
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17l4-4 4 4 8-8"/></svg></div>
+                <h3>Neighborhood Narratives</h3>
+                <p>Auto-generated summaries highlight vulnerable pockets, planned projects, and infrastructure gaps.</p>
+            </div>
+            <div class="card-surface">
+                <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M5 21l6-6M13 11l6-6"/></svg></div>
+                <h3>Data Fusion</h3>
+                <p>Fuse satellite imagery, IoT feeds, and census data with smart weights to produce high-confidence scores.</p>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="card-surface">
+                <h3>Analytics Stack</h3>
+                <ul style="padding-left:1rem; color:var(--text-muted); line-height:1.8;">
+                    <li>Interactive zoning overlays</li>
+                    <li>Population density heatmaps</li>
+                    <li>Critical infrastructure tagging</li>
+                </ul>
+            </div>
+            <div class="card-surface">
+                <h3>Planner Toolkit</h3>
+                <ul style="padding-left:1rem; color:var(--text-muted); line-height:1.8;">
+                    <li>AI-generated ward briefs</li>
+                    <li>Scenario bookmarking</li>
+                    <li>Download-ready report packs</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- WARD INFO BUTTON + OUTPUT -->
+<div id="ward-info-section" style="margin-top:2rem; text-align:center;">
+
+    <button id="ward-info-btn" class="btn btn-primary"
+        style="padding:0.9rem 1.5rem; font-size:1rem; border-radius:10px;">
+        Get Ward Info
+    </button>
+
+    <!-- OUTPUT PANEL -->
+    <div id="ward-info-box" 
+        style="display:none; margin-top:2rem; background:var(--surface);
+               padding:2rem; border-radius:16px; box-shadow:var(--shadow-soft);">
+
+        <h2 style="margin-bottom:1rem;">Ward Snapshot</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); 
+                    gap:1.5rem; text-align:left;" id="ward-stats-grid">
+            <!-- JS will insert clean UI cards here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Load dataset into memory (fetch your CSV via server route)
+    async function loadWardData() {
+        const res = await fetch("weather_data_with_population.csv");
+        const text = await res.text();
+
+        const rows = text.split("\n").map(r => r.split(","));
+        const headers = rows[0];
+        const data = rows.slice(1).map(r => {
+            let obj = {};
+            headers.forEach((h,i)=> obj[h.trim()] = r[i]);
+            return obj;
+        });
+        return data;
+    }
+
+    function makeCard(label, value) {
+        return `
+            <div class="card-surface" style="padding:1.2rem;">
+                <h4 style="margin:0; font-size:1.1rem;">${label}</h4>
+                <p style="margin-top:0.4rem; font-size:1.25rem; font-weight:600;">
+                    ${value}
+                </p>
+            </div>
+        `;
+    }
+
+    document.getElementById("ward-info-btn").addEventListener("click", async () => {
+        const box = document.getElementById("ward-info-box");
+        const grid = document.getElementById("ward-stats-grid");
+
+        const data = await loadWardData();
+        const ward = data[0]; // first ward snapshot
+
+        grid.innerHTML = `
+            ${makeCard("Ward Name", ward["ward_name"])}
+            ${makeCard("Population", ward["Population"])}
+            ${makeCard("Max Temperature", ward["temperature_max"] + " °C")}
+            ${makeCard("Min Temperature", ward["temperature_min"] + " °C")}
+            ${makeCard("Max Humidity", ward["humidity_max"] + "%")}
+            ${makeCard("Precipitation", ward["precipitation_sum"] + " mm")}
+            ${makeCard("Latitude", ward["latitude"])}
+            ${makeCard("Longitude", ward["longitude"])}
+        `;
+
+        box.style.display = "block";
+        box.scrollIntoView({ behavior: "smooth" });
+    });
+</script>
+
+    </div>
+
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+    
+            <!-- Brand + Mission -->
+            <div class="footer-col">
+                <h3 class="footer-logo">GreenGrid</h3>
+                <p class="footer-desc">
+                    AI-driven analytics helping cities become greener, smarter,
+                    and more resilient for the future.
+                </p>
+            </div>
+    
+            <!-- Solutions -->
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Ward Sustainability Index</a></li>
+                    <li><a href="#">City Emission Insights</a></li>
+                    <li><a href="#">Urban Risk Heatmap</a></li>
+                    <li><a href="#">AI Decision Support</a></li>
+                </ul>
+            </div>
+    
+            <!-- Resources -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Guide</a></li>
+                    <li><a href="#">Research Datasets</a></li>
+                    <li><a href="#">Open Data Policy</a></li>
+                </ul>
+            </div>
+    
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:team@greengrid.io">team@greengrid.io</a></li>
+                    <li>PCCOE, Pune, India</li>
+                    <li>PCCOE Grand Challenge 2025</li>
+                </ul>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© 2025 GreenGrid Team | All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
