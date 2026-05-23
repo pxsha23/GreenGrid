@@ -1,5 +1,5 @@
 // --- Global variables ---
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://greengrid-cj3v.onrender.com';
 let map;
 let originalWardsData = []; // To store the master data
 let currentWardsData = [];  // To store what's *currently* displayed

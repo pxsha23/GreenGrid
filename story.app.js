@@ -1,5 +1,5 @@
 // --- Global variables ---
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://greengrid-cj3v.onrender.com';
 window.API_URL = API_URL; // Make globally accessible
 let wardsData = [];
 let forecastChart;
