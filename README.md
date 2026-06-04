@@ -18,8 +18,6 @@ For each ward, the system:
 - Trains a **Facebook Prophet time-series model** to produce a 14-day temperature forecast with upper/lower confidence intervals
 - Serves everything through a **Flask REST API** consumed by a multi-page frontend
 
-The RAG layer lets a planner type "which wards are at highest risk this week?" and get a grounded, data-backed answer rather than a hallucinated one.
-
 ---
 
 ## Architecture
@@ -44,7 +42,7 @@ app.py (Flask)               ← REST API
 Frontend (HTML + JS + CSS)   ← Multi-page UI
   ├─ index.html              Landing page
   ├─ ward-map.html           Live ward map with vulnerability heatmap
-  ├─ explore.html            Ward drill-down with live data cards
+  ├─ explore.html            data-driven ward brief
   ├─ compare.html            Side-by-side ward comparison
   ├─ impact.html             Ecosystem impact analysis
   └─ story.html              Narrative / story mode for non-technical users
@@ -60,7 +58,7 @@ Frontend (HTML + JS + CSS)   ← Multi-page UI
 | Backend | Flask, Flask-CORS |
 | Frontend | Vanilla JS, HTML5, CSS3, Canvas API |
 | Data | Weather + population CSV (ward-level) |
-| AI layer | RAG pipeline for natural language querying |
+| AI layer | Rule-based risk classification with threshold alerts |
 
 ---
 
